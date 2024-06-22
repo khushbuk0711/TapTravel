@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1008992315016",
+    "project_id": "taptravel-92129",
+    "storage_bucket": "taptravel-92129.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008992315016:android:bbda545b1e80bef25e613d",
+        "android_client_info": {
+          "package_name": "com.example.taptravel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBbfxgJYk_q2ofPCpeVXSoj6QHpMd1Bk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
