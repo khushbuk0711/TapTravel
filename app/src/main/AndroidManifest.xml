@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
 
     <application
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TapTravel"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="4a2a685c0f4da25a61de6c0f2867e5cf" />
+
+        <activity
+            android:name=".PlaceActivity"
+            android:exported="false"
+            android:label="@string/title_activity_place"
+            android:theme="@style/Theme.TapTravel.NoActionBar" />
         <activity
             android:name=".Home_Page"
             android:exported="false"

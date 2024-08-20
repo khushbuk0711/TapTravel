@@ -7,28 +7,29 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.taptravel.HomeFragment"
+        android:name="com.example.taptravel.fragmentDrawer.HomeFragment"
         android:label=" Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_myaccount"
-        android:name="com.example.taptravel.ui.myAccount.MyAccountFragment"
+        android:name="com.example.taptravel.fragmentDrawer.MyAccountFragment"
         android:label="My Account"
         tools:layout="@layout/fragment_myaccount" />
 
     <fragment
         android:id="@+id/nav_bucketlist"
-        android:name="com.example.taptravel.ui.BucketList.BucketListFragment"
+        android:name="com.example.taptravel.fragmentDrawer.BucketListFragment"
         android:label="Bucket List"
         tools:layout="@layout/fragment_bucketlist" />
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.example.taptravel.AboutFragment"
+        android:name="com.example.taptravel.fragmentDrawer.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
-    <fragment
-        android:id="@+id/place"
-        android:name="com.example.taptravel.PlaceFragment"
-        android:label="fragment_place"/>
+    <activity
+        android:id="@+id/home_Page"
+        android:name="com.example.taptravel.Home_Page"
+        android:label="app_bar_home_page"
+        tools:layout="@layout/app_bar_home_page" />
 </navigation>

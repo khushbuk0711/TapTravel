@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/popCardView"
+    android:id="@+id/CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:id="@+id/location_name"
                 android:text="Hello World"
                 android:textSize="20dp"
@@ -43,8 +43,8 @@
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:id="@+id/location_description"
+                android:layout_height="25dp"
+                android:id="@+id/location_category"
                 android:text="Hello World"
                 android:textSize="16dp"
                 android:singleLine="true"
@@ -52,7 +52,20 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:layout_margin="10dp"
-                android:layout_marginTop="0dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/location_description"
+                android:text="Hello World"
+                android:textSize="16dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
                  />
 
             <CheckBox
@@ -60,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:background="#00000000"
-                android:button="@drawable/wishlist"
+                android:background="@null"
+                android:button="@drawable/wishlist_button"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 />

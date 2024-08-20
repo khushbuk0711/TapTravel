@@ -1,42 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaceFragment"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/bsMoviePoster"
+        android:id="@+id/location_image"
         android:layout_width="match_parent"
-        android:scaleType="centerCrop"
         android:layout_height="300dp"
         android:background="@drawable/placeholder"
-        android:src="@drawable/placeholder"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder" />
+
     <TextView
-        android:id="@+id/Place_name"
+        android:id="@+id/location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="28dp"
         android:layout_gravity="center"
-        android:textSize="27dp"
+        android:layout_margin="20dp"
         android:text="Hello"
-        android:textStyle="bold"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:textSize="27dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/location_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="Hello"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Rating: "-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="28sp" />-->
 
         <TextView
-            android:id="@+id/bsMovieYear"
+            android:id="@+id/rating_text"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="XXXX"
+            android:text="4.5"
+            android:textSize="28sp" />
+
+        <RatingBar
+            android:id="@+id/location_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="0.1"
+            android:progressTint="#FBBE07" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/location_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
             android:paddingBottom="12dp"
-            android:textSize="20sp" />
+            android:text="XXXX"
+            android:textSize="20sp"
+            android:textAlignment="center"/>
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/weather_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="20dp"
+            android:drawableEnd="@drawable/baseline_cloud_24"
+            android:text="Weather" />
+
+        <Button
+            android:id="@+id/map_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:drawableEnd="@drawable/baseline_fmd_good_24"
+            android:text="   Map" />
+    </LinearLayout>
 
 </LinearLayout>
