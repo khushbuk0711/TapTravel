@@ -1,60 +1,96 @@
 package com.example.taptravel.viewmodel
 
-import android.content.Context
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.taptravel.SearchApi.PlaceDetails
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
-class WishlistViewModel() : ViewModel() {
+class WishlistViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val uid = auth.currentUser?.uid ?: ""
-    private val _wishlist = MutableLiveData<List<PlaceDetails>>()
-    val wishlist: LiveData<List<PlaceDetails>> get() = _wishlist
+    private val _wishlist = MutableLiveData<List<PlaceDetails>?>()
+    val wishlist: LiveData<List<PlaceDetails>?> get() = _wishlist
+    private var wishlistListener: ListenerRegistration? = null
 
     init {
-        // Initialize with empty wishlist
         _wishlist.value = emptyList()
         loadWishlist()
     }
 
     private fun loadWishlist() {
-        db.collection("Wishlist").document("Favourites")
-            .collection(uid).get()
-            .addOnSuccessListener { snapshot ->
-                val wishlistItems = mutableListOf<PlaceDetails>()
-                for (document in snapshot.documents) {
-                    val place = document.toObject(PlaceDetails::class.java)
-                    place?.let {
-                        wishlistItems.add(it)
-                    }
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            Log.e("WishlistViewModel", "User not logged in")
+            _wishlist.value = emptyList()
+            return
+        }
+
+        wishlistListener = db.collection("Wishlist")
+            .document("Favourites")
+            .collection(userId)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e("WishlistViewModel", "Failed to load wishlist: ${error.message}")
+                    return@addSnapshotListener
                 }
-                _wishlist.value = wishlistItems
+
+                if (snapshot != null) {
+                    val wishlistItems = snapshot.documents.mapNotNull { document ->
+                        document.toObject(PlaceDetails::class.java)?.apply { id = document.id }
+                    }
+                    _wishlist.value = wishlistItems
+                } else {
+                    _wishlist.value = emptyList()
+                    Log.d("WishlistViewModel", "No wishlist items found")
+                }
             }
-            .addOnFailureListener {
-                // Handle failure
-            }
+    }
+
+    fun isPlaceInWishlist(placeId: String): Boolean {
+        return _wishlist.value?.any { it.id == placeId } == true
     }
 
     fun addToWishlist(place: PlaceDetails) {
-        val randomId = place.id // Assuming place.id is the unique identifier
-        if (randomId != null) {
-            db.collection("Wishlist").document("Favourites")
-                .collection(uid).document(randomId).set(place)
-        }
+        val randomId = place.id ?: return
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("Wishlist")
+            .document("Favourites")
+            .collection(userId)
+            .document(randomId)
+            .set(place)
+            .addOnSuccessListener {
+                Log.d("WishlistViewModel", "Successfully added to wishlist")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("WishlistViewModel", "Failed to add to wishlist: ${exception.message}")
+            }
     }
 
     fun removeFromWishlist(place: PlaceDetails) {
-        val randomId = place.id // Assuming place.id is the unique identifier
-        if (randomId != null) {
-            db.collection("Wishlist")
-                .document("Favourites")
-                .collection(uid).document(randomId).delete()
-        }
+        val randomId = place.id ?: return
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("Wishlist")
+            .document("Favourites")
+            .collection(userId)
+            .document(randomId)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("WishlistViewModel", "Successfully removed from wishlist")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("WishlistViewModel", "Failed to remove from wishlist: ${exception.message}")
+            }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        wishlistListener?.remove()
     }
 }

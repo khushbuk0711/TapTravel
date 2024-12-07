@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1008992315016",
-    "project_id": "taptravel-92129",
-    "storage_bucket": "taptravel-92129.appspot.com"
+    "project_number": "917441284650",
+    "project_id": "tap-travel",
+    "storage_bucket": "tap-travel.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1008992315016:android:bbda545b1e80bef25e613d",
+        "mobilesdk_app_id": "1:917441284650:android:3f8d0532b48f5bbb6ed153",
         "android_client_info": {
           "package_name": "com.example.taptravel"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCBbfxgJYk_q2ofPCpeVXSoj6QHpMd1Bk4"
+          "current_key": "AIzaSyDyuXel4hFn3kB2-wbsiqogLU2r2hvYnpw"
         }
       ],
       "services": {

@@ -1,4 +1,3 @@
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,6 +60,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             .target(location)
             .zoom(14.0)
             .build()
+        mapmyIndiaMap.addMarker(
+            com.mapmyindia.sdk.maps.annotations.MarkerOptions()
+                .position(location)
+                .title("Selected Location")
+                .snippet("Latitude: $latitude, Longitude: $longitude")
+        )
     }
     override fun onMapError(errorCode: Int, errorMessage: String?) {
         val errorText = "Map Error: $errorMessage (Code: $errorCode)"

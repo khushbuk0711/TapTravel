@@ -9,18 +9,33 @@ import com.example.taptravel.R
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
-abstract class  SwipeGesture(val context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+class SwipeGesture(context: Context, private val onSwipe: (Int) -> Unit) :
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
-    val deleteColor = ContextCompat.getColor(context, R.color.deleteColor)
-    val deleteIcon = R.drawable.delete
+    private val deleteColor = ContextCompat.getColor(context, R.color.deleteColor)
+    private val deleteIcon = R.drawable.delete
 
-    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
         return false
     }
 
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int,
-                             isCurrentlyActive: Boolean) {
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        onSwipe(viewHolder.adapterPosition)
+    }
+
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
         RecyclerViewSwipeDecorator.Builder(
             c,
             recyclerView,
@@ -36,6 +51,7 @@ abstract class  SwipeGesture(val context: Context) : ItemTouchHelper.SimpleCallb
             .addSwipeLeftActionIcon(deleteIcon)
             .create()
             .decorate()
-    }
 
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    }
 }

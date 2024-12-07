@@ -1,7 +1,5 @@
 package com.example.taptravel.search_data
 
-import com.example.taptravel.fragmentDrawer.Wishlist
-
 data class Data(
     val is_top_result: Boolean,
     val result_object: ResultObject,

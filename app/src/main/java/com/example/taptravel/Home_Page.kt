@@ -134,15 +134,15 @@ class Home_Page : AppCompatActivity() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            val navController = findNavController(R.id.nav_host_fragment_content_home_page)
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_home_page)
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_home_page)
+            val currentFragment = navHostFragment?.childFragmentManager?.primaryNavigationFragment
 
             Log.d("Home_Page", "Current Fragment: ${currentFragment?.javaClass?.simpleName}")
 
             if (currentFragment is HomeFragment) {
                 if (currentFragment.hardcodedPlacesVisible) {
                     Log.d("Home_Page", "Hardcoded places visible, finishing activity")
-                    finish()
+                    finishAffinity()
                 } else {
                     Log.d("Home_Page", "Loading hardcoded places")
                     currentFragment.hardcodedPlacesVisible = true
@@ -151,7 +151,7 @@ class Home_Page : AppCompatActivity() {
                     currentFragment.loadHardcodedPlaces()
                 }
             } else {
-                // Use popBackStack() to handle back navigation properly
+                val navController = findNavController(R.id.nav_host_fragment_content_home_page)
                 if (!navController.popBackStack(R.id.nav_home, false)) {
                     Log.d("Home_Page", "Navigating to HomeFragment")
                     navController.navigate(R.id.nav_home)

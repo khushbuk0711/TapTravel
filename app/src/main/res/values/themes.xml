@@ -1,18 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.TapTravel" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+
+    <style name="Theme.TapTravel" parent="Base.Theme.TapTravel" >
+        <item name="android:buttonTintMode">@color/favourite</item>
     </style>
 
-    <style name="Theme.TapTravel" parent="Base.Theme.TapTravel" />
 
     <style name="Theme.TapTravel.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="Base.Theme.TapTravel" parent="Theme.Material3.DayNight.NoActionBar">
 
-    <style name="Theme.TapTravel.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </style>
 
-    <style name="Theme.TapTravel.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.TapTravel.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    </style>
+    <style name="Theme.TapTravel.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+
+    </style>
 </resources>

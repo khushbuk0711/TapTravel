@@ -37,33 +37,22 @@ class BucketListFragment : Fragment(), WishlistAdapter.WishlistItemClickListener
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
-
         wishlistViewModel.wishlist.observe(viewLifecycleOwner) { wishlist ->
-            adapter.updateList(wishlist)
-        }
-
-        val swipeGesture = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                val place = adapter.getItem(position)
-                adapter.deleteItem(position)
-                wishlistViewModel.removeFromWishlist(place)
-                Toast.makeText(context, "Removed from Wishlist: ${place.name}", Toast.LENGTH_SHORT).show()
+            if (wishlist != null) {
+                adapter.updateList(wishlist)
             }
         }
+
+        val swipeGesture = SwipeGesture(requireContext()) { position ->
+            val place = adapter.getItem(position)
+            adapter.deleteItem(position)
+            wishlistViewModel.removeFromWishlist(place)
+            Toast.makeText(context, "Removed from Wishlist: ${place.name}", Toast.LENGTH_SHORT).show()
+        }
+
         val itemTouchHelper = ItemTouchHelper(swipeGesture)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
-
     override fun onItemClick(place: PlaceDetails) {
         // Handle item click
     }

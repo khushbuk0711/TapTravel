@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -72,7 +71,6 @@ class HomeFragment : Fragment() {
         })
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 1)
-
         searchPlace.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 progressBar.visibility = View.VISIBLE
@@ -97,33 +95,14 @@ class HomeFragment : Fragment() {
             }
         })
 
-        // Initially load hardcoded places
+
         loadHardcodedPlaces()
 
-        // Handle back button press
-//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                if (!hardcodedPlacesVisible) {
-//                    isEnabled = true
-//                    // Show hardcoded places when back button is pressed
-//                    searchPlace.setQuery("", false)
-//                    searchPlace.clearFocus()
-//                    hardcodedPlacesVisible = true
-//                    loadHardcodedPlaces()
-//                }
-//                else{
-//                    isEnabled = false
-//                    requireActivity().finish()
-//                }
-//
-//            }
-//        })
     }
 
     fun loadHardcodedPlaces() {
-        val hardcodedPlaces = Hardcode_Data.places // Example list of hardcoded places
+        val hardcodedPlaces = Hardcode_Data.places
 
-        // Update adapter with hardcoded places
         adapter.hardcodedPlaces = hardcodedPlaces
         adapter.apiPlaces = emptyList() // Clear API places
         adapter.notifyDataSetChanged()
