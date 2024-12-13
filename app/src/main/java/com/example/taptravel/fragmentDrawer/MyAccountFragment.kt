@@ -132,7 +132,6 @@ class MyAccountFragment : Fragment() {
             binding.etUserName.requestFocus()
         }
         if (isEditing) {
-            // Save the new name
             val newName = binding.etUserName.text.toString().trim()
             if (newName.isNotEmpty()) {
                 user.updateProfile(buildProfileUpdate(newName))
@@ -152,7 +151,6 @@ class MyAccountFragment : Fragment() {
             inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         }
 
-        // Toggle visibility of TextView and EditText
         binding.tvUserName.visibility = if (isEditing) View.VISIBLE else View.GONE
         binding.userName.visibility = if (isEditing) View.VISIBLE else View.GONE
         binding.etUserName.visibility = if (isEditing) View.GONE else View.VISIBLE
@@ -190,13 +188,11 @@ class MyAccountFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Change Password")
 
-        // Set up the input
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         input.hint = "Enter new password"
         builder.setView(input)
 
-        // Set up the buttons
         builder.setPositiveButton("Change") { dialog, _ ->
             val newPassword = input.text.toString().trim()
 

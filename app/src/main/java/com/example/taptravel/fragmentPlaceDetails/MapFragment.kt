@@ -38,13 +38,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_maps, container, false)
 
-        // Retrieve arguments (latitude and longitude)
         arguments?.let {
             latitude = it.getDouble("latitude", 0.0)
             longitude = it.getDouble("longitude", 0.0)
         }
 
-        // Initialize map view
         mapView = rootView.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -54,7 +52,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: MapmyIndiaMap) {
         mapmyIndiaMap = map
 
-        // Move camera to the specified location
         val location = LatLng(latitude, longitude)
         mapmyIndiaMap.cameraPosition = CameraPosition.Builder()
             .target(location)

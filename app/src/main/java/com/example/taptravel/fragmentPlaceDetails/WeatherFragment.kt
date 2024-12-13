@@ -22,7 +22,6 @@ class WeatherFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var weatherRepository: WeatherRepository
 
-    // Latitude and longitude arguments
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
@@ -37,7 +36,6 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve latitude and longitude from arguments
         arguments?.let {
             latitude = it.getDouble("latitude", 0.0)
             longitude = it.getDouble("longitude", 0.0)
@@ -45,28 +43,24 @@ class WeatherFragment : Fragment() {
 
         weatherRepository = WeatherRepository(RetrofitInstance.apiInterface)
 
-        // Fetch current weather and astronomy data and update UI
+
         fetchWeatherData()
     }
 
     private fun fetchWeatherData() {
-        // Using coroutines to handle async network call
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val currentWeatherResponse = weatherRepository.getCurrentWeather("$latitude,$longitude")
                 val astronomyResponse = weatherRepository.getAstronomy("$latitude,$longitude")
 
                 withContext(Dispatchers.Main) {
-                    // Update UI with the fetched data
                     if (currentWeatherResponse.isSuccessful && astronomyResponse.isSuccessful) {
                         updateUI(currentWeatherResponse.body(), astronomyResponse.body())
                     } else {
-                        // Handle error response
                         showError("Failed to fetch weather or astronomy data")
                     }
                 }
             } catch (e: Exception) {
-                // Handle network or API call exception
                 withContext(Dispatchers.Main) {
                     showError("Error: ${e.message}")
                 }

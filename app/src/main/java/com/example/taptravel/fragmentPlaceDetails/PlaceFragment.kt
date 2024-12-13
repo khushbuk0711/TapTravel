@@ -50,21 +50,17 @@ class PlaceFragment : Fragment() {
             val image = args.getString("image", "")
             val rating = args.getString("rating", "0.0")?.toFloatOrNull() ?: 0.0f
 
-            // Set data in ViewModel
             placeViewModel.setData(name, category, description, image, rating)
         }
         binding.weatherBtn.setOnClickListener {
-            // Navigate to WeatherFragment
             navigateToWeatherFragment(latitude, longitude)
         }
 
         binding.mapBtn.setOnClickListener {
-            // Navigate to MapFragment
             navigateToMapFragment(latitude, longitude)
         }
     }
     private fun navigateToWeatherFragment(latitude: Double?, longitude: Double?) {
-        // Example: Replace current fragment with WeatherFragment
         if (latitude != null && longitude != null) {
             val weatherFragment = WeatherFragment().apply {
                 arguments = Bundle().apply {
@@ -81,7 +77,6 @@ class PlaceFragment : Fragment() {
     }
 
     private fun navigateToMapFragment(latitude: Double?, longitude: Double?) {
-        // Example: Replace current fragment with MapFragment
         if (latitude != null && longitude != null) {
             val mapFragment = MapFragment().apply {
                 arguments = Bundle().apply {
@@ -101,25 +96,3 @@ class PlaceFragment : Fragment() {
         _binding = null
     }
 }
-
-//        parentFragmentManager.setFragmentResultListener("dataFromAdapter", this) { requestKey, bundle ->
-//            val name = bundle.getString("name")
-//            val category = bundle.getString("category")
-//            val description = bundle.getString("description")
-//            val image = bundle.getString("image")
-//            val ratingString = bundle.getString("rating", "0.0")
-//            var link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlZSOLoJ-j_JMIlVZZAlQg3R6_y8Jvq4QNumJl1fbowA&s"
-//            if (image != null) {
-//                link = image
-//                Log.i("runCheck", link)
-//            }
-//            val rating = ratingString.toFloatOrNull() ?: 0.0f
-//            binding.locationName.text = name
-//            binding.locationDescription.text = description
-//            binding.locationCategory.text = category
-//            binding.locationRating.rating = rating
-//            Glide.with(this)
-//                .load(link)
-//                .into(binding.locationImage)
-//
-//        }

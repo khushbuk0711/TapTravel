@@ -10,7 +10,6 @@ class PlaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place)
 
-        // Load PlaceFragment
         if (savedInstanceState == null) {
             val placeFragment = PlaceFragment().apply {
                 arguments = intent.extras

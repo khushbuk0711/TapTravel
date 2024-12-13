@@ -36,12 +36,6 @@ class Home_Page : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarHomePage.toolbar)
-
-//        binding.appBarHomePage.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .setAnchorView(R.id.fab).show()
-//        }
         drawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_home_page)
@@ -176,7 +170,7 @@ class Home_Page : AppCompatActivity() {
             user.photoUrl?.let { photoUrl ->
                 Glide.with(this)
                     .load(photoUrl)
-                    .placeholder(R.mipmap.ic_launcher)// Placeholder image if none is available
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(profileImageView)
             }
         }
